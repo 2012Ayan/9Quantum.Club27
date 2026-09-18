@@ -309,7 +309,7 @@ if (homeButton) {
 
 const funFacts = [
 
-    "Fun fact: Faris is Gay.",
+    "Fun fact: Tayyab loves eating bananas.",
 
     "Fun fact: Saad bache khata hai."
 
