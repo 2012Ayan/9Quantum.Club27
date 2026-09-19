@@ -1,11 +1,10 @@
 /* =========================================================
    CLASS BOYS HQ
-   FINAL JAVASCRIPT
 ========================================================= */
 
 
 /* =========================================================
-   THE 14 BOYS
+   BOYS
 ========================================================= */
 
 const boys = [
@@ -42,7 +41,7 @@ const boys = [
 
     {
         name: "Qadir",
-        nickname: "Philospher Thinker"
+        nickname: "Phiospher Thinker"
     },
 
     {
@@ -62,7 +61,7 @@ const boys = [
 
     {
         name: "Mohsin",
-        nickname: "Paragon chapri"
+        nickname: "Paragon chapri,wanabe sigma"
     },
 
     {
@@ -102,8 +101,13 @@ const leaderboardTopButton =
 const funFactButton =
     document.getElementById("funFactButton");
 
+const themeSelector =
+    document.getElementById("themeSelector");
+
 const homeButton =
-    document.querySelector('.nav-item[href="#home"]');
+    document.querySelector(
+        '.nav-item[href="#home"]'
+    );
 
 
 /* =========================================================
@@ -113,14 +117,8 @@ const homeButton =
 function renderLeaderboard() {
 
     if (!leaderboardBody) {
-
-        console.error(
-            "Leaderboard body was not found."
-        );
-
         return;
     }
-
 
     leaderboardBody.innerHTML = "";
 
@@ -129,7 +127,6 @@ function renderLeaderboard() {
 
         const row =
             document.createElement("div");
-
 
         row.className =
             "leaderboard-row";
@@ -156,35 +153,23 @@ function renderLeaderboard() {
 
     });
 
-
-    console.log(
-        `${boys.length} boys loaded into leaderboard.`
-    );
 }
 
 
 /* =========================================================
-   OPEN LEADERBOARD
+   LEADERBOARD
 ========================================================= */
 
 function openLeaderboard() {
 
     if (!leaderboard) {
-
-        console.error(
-            "Leaderboard section was not found."
-        );
-
         return;
     }
 
 
     leaderboard.scrollIntoView({
-
         behavior: "smooth",
-
         block: "start"
-
     });
 
 
@@ -222,10 +207,6 @@ function openLeaderboard() {
 }
 
 
-/* =========================================================
-   LEADERBOARD BUTTON
-========================================================= */
-
 if (leaderboardButton) {
 
     leaderboardButton.addEventListener(
@@ -241,10 +222,6 @@ if (leaderboardButton) {
 
 }
 
-
-/* =========================================================
-   VIEW ALL BUTTON
-========================================================= */
 
 if (leaderboardTopButton) {
 
@@ -263,7 +240,7 @@ if (leaderboardTopButton) {
 
 
 /* =========================================================
-   HOME BUTTON
+   HOME
 ========================================================= */
 
 if (homeButton) {
@@ -276,11 +253,8 @@ if (homeButton) {
 
 
             window.scrollTo({
-
                 top: 0,
-
                 behavior: "smooth"
-
             });
 
 
@@ -454,9 +428,7 @@ function closeFunFact(popup) {
     setTimeout(() => {
 
         if (popup.parentNode) {
-
             popup.remove();
-
         }
 
     }, 200);
@@ -485,6 +457,84 @@ if (funFactButton) {
 
 
 /* =========================================================
+   THEME SYSTEM
+========================================================= */
+
+function applyTheme(theme) {
+
+    document.body.classList.remove(
+        "theme-npc",
+        "theme-feminist",
+        "theme-blackout"
+    );
+
+
+    if (
+        theme !== "npc" &&
+        theme !== "feminist" &&
+        theme !== "blackout"
+    ) {
+
+        theme = "npc";
+
+    }
+
+
+    document.body.classList.add(
+        `theme-${theme}`
+    );
+
+
+    if (themeSelector) {
+
+        themeSelector.value =
+            theme;
+
+    }
+
+
+    localStorage.setItem(
+        "classBoysTheme",
+        theme
+    );
+
+}
+
+
+/* =========================================================
+   THEME SELECTOR
+========================================================= */
+
+if (themeSelector) {
+
+    themeSelector.addEventListener(
+        "change",
+        function () {
+
+            applyTheme(
+                themeSelector.value
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD SAVED THEME
+========================================================= */
+
+const savedTheme =
+    localStorage.getItem(
+        "classBoysTheme"
+    ) || "npc";
+
+
+applyTheme(savedTheme);
+
+
+/* =========================================================
    ESCAPE = CLOSE POPUP
 ========================================================= */
 
@@ -501,11 +551,7 @@ document.addEventListener(
 
 
             if (popup) {
-
-                closeFunFact(
-                    popup
-                );
-
+                closeFunFact(popup);
             }
 
         }
@@ -515,7 +561,6 @@ document.addEventListener(
 
 
 /* =========================================================
-   KEYBOARD SHORTCUT
    L = LEADERBOARD
 ========================================================= */
 
@@ -538,7 +583,8 @@ document.addEventListener(
                 active &&
                 (
                     active.tagName === "INPUT" ||
-                    active.tagName === "TEXTAREA"
+                    active.tagName === "TEXTAREA" ||
+                    active.tagName === "SELECT"
                 )
             ) {
 
@@ -556,7 +602,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   BUTTON PRESS EFFECT
+   BUTTON PRESS
 ========================================================= */
 
 document
@@ -609,25 +655,21 @@ renderLeaderboard();
 
 
 console.log(
-    "================================"
-);
-
-console.log(
     "CLASS BOYS HQ LOADED"
 );
 
 console.log(
-    "Class size: 14"
+    "14 BOYS LOADED"
 );
 
 console.log(
-    "Leaderboard: READY"
+    "THEMES READY"
 );
 
 console.log(
-    "Fun Facts: READY"
+    "LEADERBOARD READY"
 );
 
 console.log(
-    "================================"
+    "FUN FACTS READY"
 );
